@@ -1,38 +1,106 @@
 .App {
-  text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 300px;
+	height: fit-content;
+	min-height: 400px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header{
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+	background-color: rgb(241, 116, 33);
+	height: 30px;
+	width: 96%;
+	color: white;
+	border-radius: 8px 8px 0 0;
+	padding: 5px 0 5px 8px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.conteiner{
+	display: flex;
+	flex-direction: column;
+	height: fit-content;
+	margin: 8px 0;
+	width: 98%;
+	background-color: rgb(228, 226, 226);
+	border-radius: 0 0 8px 8px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+input{
+	text-align: center;
+	padding: 0;
+	margin: 3px 0;
+	height:fit-content;
+	min-height: 35px;
+	width:98%;
+	border: none;
+	box-shadow: 1px 0.2px 6px rgb(99, 97, 97);
+	border-radius: 5px;
+	outline: none;
 }
 
-.App-link {
-  color: #61dafb;
+.addTask{
+	position: relative;
+	height:35px;
+	width: 100%;
+	left: 3px;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.button{
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	position: relative;
+	left: 270px;
+	bottom: 40px;
+	border: none;
+	font-size: 25px;
+	color: rgb(69, 69, 69);
+	transition: all 0.1s ease-in-out;
+
+}
+
+.button:hover{
+	transform: translateY(-1px);
+}
+
+.flexRow{
+	display: flex;
+	flex-direction: row;
+}
+
+.flexSpBetwean{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.addTask{
+	width: 100%;
+}
+
+
+.done, .del, .title{
+	cursor: pointer;
+	margin: 8px;
+	transition: all 0.1s ease;
+}
+
+.del:hover, .done:hover{
+	transform: translateY(-1.5px);
+}
+
+.Task{
+	background-color: aliceblue;
+	width: 98%px;
+	height: fit-content;
+	border-radius: 5px;
+	margin: 3px;
+
 }

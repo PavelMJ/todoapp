@@ -1,25 +1,72 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Task from './components/Task';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+	const [tasks, setTasks] = useState([
+		{ task: 'lets do it', complete: false }
+	])
+	const [newTask, setNewTask] = useState('')
+
+	function handleEnter(event){
+		if(event.key==="Enter"){
+			addTask(newTask);
+			setNewTask('')
+		}
+	}
+	const addTask = (value) => {
+		if (value !== '') {
+			let newTask = {
+				task: value,
+				complete: false,
+			}
+			setTasks([...tasks, newTask])
+		}
+	}
+
+	const removeTask = (index) => {
+		let filtred = tasks.filter(val => val !== tasks[index])
+		setTasks([...filtred])
+
+	}
+
+	const doneTask = (index) => {
+		tasks[index].complete = !tasks[index].complete
+		setTasks([...tasks])
+
+	}
+
+	return (
+		<div className="App">
+			<header>My Tasks</header>
+			<div className=' addTask'>
+				<input
+					onKeyDown={(e)=>{handleEnter(e)}}
+					type="text"
+					placeholder='new task'
+					onChange={(e) => { setNewTask(e.target.value) }}
+					value={newTask} />
+				<div onClick={() => {
+					addTask(newTask);
+					setNewTask('')
+				}} className='button'>+</div>
+			</div>
+			<div className='conteiner'>
+				{tasks.map((task, index) => {
+					return <Task
+						key={index}
+						task={task}
+						index={index}
+						removeTask={removeTask}
+						doneTask={doneTask}
+					/>
+				})}
+			</div>
+
+
+		</div>
+	);
 }
 
 export default App;
