@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import './App.css';
-import Task from './components/Task';
-
+import Tasklist from './components/Tasklist';
 function App() {
 
-	const [tasks, setTasks] = useState([
-		{ task: 'lets do it', complete: false }
-	])
+	const [taskLists, setTaskLists]=useState([{name:'My tasks', tasks:[{ task: 'lets do it', complete: false }]}])
+
+	// const [tasks, setTasks] = useState([{ task: 'lets do it', complete: false }])
 	const [newTask, setNewTask] = useState('')
 
 	function handleEnter(event){
