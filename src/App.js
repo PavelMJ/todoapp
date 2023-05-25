@@ -1,69 +1,43 @@
 import { useState } from 'react';
 import './App.css';
 import Tasklist from './components/Tasklist';
+import Creator from './components/Creator';
+
 function App() {
 
-	const [taskLists, setTaskLists]=useState([{name:'My tasks', tasks:[{ task: 'lets do it', complete: false }]}])
-
-	// const [tasks, setTasks] = useState([{ task: 'lets do it', complete: false }])
-	const [newTask, setNewTask] = useState('')
-
-	function handleEnter(event){
-		if(event.key==="Enter"){
-			addTask(newTask);
-			setNewTask('')
+	const [taskLists, setTaskLists] = useState([{ name: 'My tasks' }])
+	const [listName, setListName] = useState(false)
+	  const nameSetting = ()=>{
+			setListName(!listName)
 		}
-	}
-	const addTask = (value) => {
-		if (value !== '') {
-			let newTask = {
-				task: value,
-				complete: false,
+		const addList = (name) => {
+			if (name !=='') {
+			let newList = {
+				name,
 			}
-			setTasks([...tasks, newTask])
+			setTaskLists([...taskLists, newList])
+			setListName(!listName)
+
 		}
-	}
-
-	const removeTask = (index) => {
-		let filtred = tasks.filter(val => val !== tasks[index])
-		setTasks([...filtred])
-
-	}
-
-	const doneTask = (index) => {
-		tasks[index].complete = !tasks[index].complete
-		setTasks([...tasks])
-
 	}
 
 	return (
 		<div className="App">
-			<header>My Tasks</header>
-			<div className=' addTask'>
-				<input
-					onKeyDown={(e)=>{handleEnter(e)}}
-					type="text"
-					placeholder='new task'
-					onChange={(e) => { setNewTask(e.target.value) }}
-					value={newTask} />
-				<div onClick={() => {
-					addTask(newTask);
-					setNewTask('')
-				}} className='button'>+</div>
+			<div>
+				{listName && <Creator addList={addList} setListName={setListName} nameSetting={nameSetting}  />}
 			</div>
-			<div className='conteiner'>
-				{tasks.map((task, index) => {
-					return <Task
-						key={index}
-						task={task}
-						index={index}
-						removeTask={removeTask}
-						doneTask={doneTask}
-					/>
-				})}
+			<div className='Content'>
+			{taskLists.map((list, index) => {
+				return <Tasklist
+					key={index}
+					index={index}
+					list={list}
+					
+				/>
+				})
+			}
 			</div>
-
-
+			<button onClick={nameSetting} className='button3'>+</button>
 		</div>
 	);
 }
