@@ -2,10 +2,10 @@ import React, { useState } from 'react'
 import { Reorder } from 'framer-motion';
 
 
-export default function Task({ task, index, doneTask, removeTask}) {
+export default function Task({ task, index, doneTask, removeTask }) {
 	const [done, setDone] = useState(false)
 	return (
-		<Reorder.Item  value={task} >
+		<Reorder.Item value={task} >
 			<div className='Task flexSpBetwean'>
 				<div className='done' onClick={() => {
 					setDone(!done);

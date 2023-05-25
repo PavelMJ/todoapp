@@ -31,7 +31,7 @@ header{
 	display: flex;
 	justify-content: flex-start;
 	align-items: flex-end;
-	background-color: rgb(241, 116, 33);
+	/* background-color: rgb(241, 116, 33); */
 	height: 30px;
 	width: 96%;
 	color: white;
@@ -209,5 +209,35 @@ header{
 .button3, .close:active{
 	transform: translateY(3px);
 	box-shadow: 0px 1px 2px rgb(22, 22, 22);
+
 }
+
+.color-preview{
+	width: 100px;
+	height: 45px;
+	/* margin: 2px; */
+	border-radius: 5px;
+
+
+}
+
+.blue {
+	background-color: #4663d7;
+}
+.pink {
+	background-color: #eb5ea0;
+}
+.green {
+	background-color: #5cc77e;
+}
+.orange {
+	background-color: #e7713b;
+}
+.violett {
+	background-color: #d257b1;
+}
+
+
+
+
 

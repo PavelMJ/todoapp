@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-// import Task from './Task'
+import Task from './Task'
 import { Reorder } from 'framer-motion';
 
 export default function Tasklist({ list }) {
 	const [cnt, setCnt] = useState(1)
-
+	console.log(list);
 	const [newTask, setNewTask] = useState('')
 	const [tasks, setTasks] = useState([{ id: 0, task: 'lets do it', complete: false }])
 	const addTask = (task, id) => {
@@ -40,7 +40,7 @@ export default function Tasklist({ list }) {
 	}
 	return (
 		<div className='Tasklist'>
-			<header>{list.name}</header>
+			<header style={{backgroundColor:`${list.color}`}}>{list.name}</header>
 			<div className=' addTask'>
 				<input
 					className='input'
@@ -71,23 +71,23 @@ export default function Tasklist({ list }) {
 	)
 }
 
-const Task = ({ task, index, doneTask, removeTask }) => {
-	const [done, setDone] = useState(false)
-	return (
-		<Reorder.Item value={task} >
-			<div className='Task flexSpBetwean'>
-				<div className='done' onClick={() => {
-					setDone(!done);
-					doneTask(index)
-				}}>
-					{done && <img src="/img/done.svg" alt="" />}
-					{done === false && <img src="/img/undone.svg" alt="" />}
-				</div>
-				<div className='title' style={{ textDecoration: `${done ? 'line-through' : 'none'}` }}>{task.task}</div>
-				<div className='del' onClick={() => { removeTask(index) }}>
-					<img src="/img/trash.svg" alt="" />
-				</div>
-			</div>
-		</Reorder.Item>
-	)
-}
+// const Task = ({ task, index, doneTask, removeTask }) => {
+// 	const [done, setDone] = useState(false)
+// 	return (
+// 		<Reorder.Item value={task} >
+// 			<div className='Task flexSpBetwean'>
+// 				<div className='done' onClick={() => {
+// 					setDone(!done);
+// 					doneTask(index)
+// 				}}>
+// 					{done && <img src="/img/done.svg" alt="" />}
+// 					{done === false && <img src="/img/undone.svg" alt="" />}
+// 				</div>
+// 				<div className='title' style={{ textDecoration: `${done ? 'line-through' : 'none'}` }}>{task.task}</div>
+// 				<div className='del' onClick={() => { removeTask(index) }}>
+// 					<img src="/img/trash.svg" alt="" />
+// 				</div>
+// 			</div>
+// 		</Reorder.Item>
+// 	)
+// }

@@ -4,16 +4,17 @@ import Tasklist from './components/Tasklist';
 import Creator from './components/Creator';
 
 function App() {
-
-	const [taskLists, setTaskLists] = useState([{ name: 'My tasks' }])
+	const [taskLists, setTaskLists] = useState([{ name: 'My tasks', color:'#ce4cae' }])
 	const [listName, setListName] = useState(false)
 	  const nameSetting = ()=>{
 			setListName(!listName)
 		}
-		const addList = (name) => {
-			if (name !=='') {
+		const addList = (name,color) => {
+			if (color && name !=='') {
 			let newList = {
 				name,
+				color,
+
 			}
 			setTaskLists([...taskLists, newList])
 			setListName(!listName)
