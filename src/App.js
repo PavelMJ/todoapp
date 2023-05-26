@@ -2,11 +2,14 @@ import { useState } from 'react';
 import './App.css';
 import Tasklist from './components/Tasklist';
 import Creator from './components/Creator';
+import Header from './components/Header';
 
 function App() {
 	const [taskLists, setTaskLists] = useState([{ name: 'My tasks', color:'#ce4cae' }])
 	const [listName, setListName] = useState(false)
-	  const nameSetting = ()=>{
+
+
+	  const createList= ()=>{
 			setListName(!listName)
 		}
 		const addList = (name,color) => {
@@ -14,6 +17,7 @@ function App() {
 			let newList = {
 				name,
 				color,
+				tasks:[]
 
 			}
 			setTaskLists([...taskLists, newList])
@@ -21,11 +25,17 @@ function App() {
 
 		}
 	}
+	const updateList=(task,index)=>{
+		taskLists[index].tasks.push(task)
+		setTaskLists([...taskLists])
+	}
+	
 
 	return (
 		<div className="App">
+			<Header createList={createList} />
 			<div>
-				{listName && <Creator addList={addList} setListName={setListName} nameSetting={nameSetting}  />}
+				{listName && <Creator addList={addList} setListName={setListName} createList={createList}  />}
 			</div>
 			<div className='Content'>
 			{taskLists.map((list, index) => {
@@ -33,12 +43,13 @@ function App() {
 					key={index}
 					index={index}
 					list={list}
+					updateList={updateList}
 					
 				/>
 				})
 			}
 			</div>
-			<button onClick={nameSetting} className='button3'>+</button>
+			
 		</div>
 	);
 }

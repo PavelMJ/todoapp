@@ -4,7 +4,7 @@ import Select from 'react-select'
 
 
 
-export default function Creator({addList, nameSetting}) {
+export default function Creator({addList, createList}) {
 
 	const colorOptions = [
     { value: '#4663d7', label: <div className='color-preview blue'></div> },
@@ -42,7 +42,7 @@ export default function Creator({addList, nameSetting}) {
 	const [name, setName]=useState('')
 	function handleEscape(event){
 		if(event.key==="Esc"){
-			nameSetting()
+			createList()
 		}
 	}
 
@@ -53,7 +53,7 @@ export default function Creator({addList, nameSetting}) {
 	}
 	return (
 		<div className='Creator overlay'>
-			<img className='close' src="/img/close.svg" alt="close" onClick={nameSetting} />
+			<img className='close' src="/img/close.svg" alt="close" onClick={createList} />
 			<div className='input2 flexRow'>
 			<input onKeyDown={(e)=>{handleEnter(e)}} onChange={(event)=>{setName(event.target.value)}} className='input3'  type="text" placeholder='create new task list' />
 			{selectedColor && <button className='button2' onClick={()=>{addList(name,selectedColor.value)}}>+</button>}
