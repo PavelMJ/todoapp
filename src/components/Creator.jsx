@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Select from 'react-select'
 
 
@@ -37,14 +37,22 @@ export default function Creator({addList, createList}) {
     })
   };
 
-
-
 	const [name, setName]=useState('')
-	function handleEscape(event){
-		if(event.key==="Esc"){
-			createList()
+
+
+
+	useEffect(()=>{
+
+		function handleEscape(event){
+			if(event.key === 'Escape') createList()
 		}
-	}
+
+		document.addEventListener('keydown',handleEscape)
+
+		return ()=>{
+			document.removeEventListener('keydown',handleEscape)
+		}
+	},[])
 
 	function handleEnter(event){
 		if(event.key==="Enter"){

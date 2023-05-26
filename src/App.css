@@ -23,18 +23,37 @@
 	flex-direction: column;
 	width: 300px;
 	height: fit-content;
-	
 	margin: 20px 8px;
 }
+
+.list-name{
+	width: 50%;
+	height: 90%;
+	cursor: grab;
+
+}
+
+
+.close-list{
+	width: 20px;
+	height: 20px;
+	margin: 5px 2px;
+	cursor: pointer;
+}
+
+
 
 .Header{
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-
+	align-items: center;
+	opacity: 70%;
 	width: 100vw;
-	height: 38px;
-	background-color: #b466e9;
+	height: 55px;
+	/* background-color: #305a96; */
+	/* filter: blur(5px); */
+	/* z-index: 2; */
 }
 
 header{
@@ -183,7 +202,7 @@ header{
  
 .create-button{
 	cursor: pointer;
-	height: 30px;
+	height: 40px;
 	font-size: 22px;
 	border-radius: 5px;
 	background-color: rgb(150, 60, 211);
@@ -191,6 +210,8 @@ header{
 	color: aliceblue;
 	transition: all 0.1s ease;
 	margin: 3px;
+	padding: 8px;
+	z-index: 8;
 }
 
 

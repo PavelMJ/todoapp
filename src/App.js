@@ -5,51 +5,62 @@ import Creator from './components/Creator';
 import Header from './components/Header';
 
 function App() {
-	const [taskLists, setTaskLists] = useState([{ name: 'My tasks', color:'#ce4cae' }])
+	const [taskLists, setTaskLists] = useState([{ id: 1, name: 'My tasks', color: '#ce4cae' }])
 	const [listName, setListName] = useState(false)
+	const [idCnt, setIdCnt] = useState(1)
 
 
-	  const createList= ()=>{
-			setListName(!listName)
-		}
-		const addList = (name,color) => {
-			if (color && name !=='') {
+	const createList = () => {
+		setListName(!listName)
+	}
+
+	const addList = (name, color) => {
+		setIdCnt(idCnt + 1)
+		if (color && name !== '') {
 			let newList = {
+				id: idCnt,
 				name,
 				color,
-				tasks:[]
-
+				tasks: []
 			}
+
 			setTaskLists([...taskLists, newList])
 			setListName(!listName)
 
 		}
 	}
-	const updateList=(task,index)=>{
+
+	const updateList = (task, index) => {
 		taskLists[index].tasks.push(task)
 		setTaskLists([...taskLists])
 	}
-	
+
+	const removeList = (index)=>{
+		setTaskLists([...taskLists.filter(val => val !== taskLists[index])])
+
+	}
+
 
 	return (
 		<div className="App">
 			<Header createList={createList} />
 			<div>
-				{listName && <Creator addList={addList} setListName={setListName} createList={createList}  />}
+				{listName && <Creator addList={addList} setListName={setListName} createList={createList} />}
 			</div>
 			<div className='Content'>
-			{taskLists.map((list, index) => {
-				return <Tasklist
-					key={index}
-					index={index}
-					list={list}
-					updateList={updateList}
-					
-				/>
+				{taskLists.map((list, index) => {
+					return <Tasklist
+						removeList={removeList}
+						key={index}
+						index={index}
+						list={list}
+						updateList={updateList}
+
+					/>
 				})
-			}
+				}
 			</div>
-			
+
 		</div>
 	);
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Task from './Task'
 import { Reorder } from 'framer-motion';
 
-export default function Tasklist({ list, index, updateList }) {
+export default function Tasklist({ list, index, updateList, removeList }) {
 	const [cnt, setCnt] = useState(1)
 
 	const [newTask, setNewTask] = useState('')
@@ -41,10 +41,15 @@ export default function Tasklist({ list, index, updateList }) {
 		}
 	}
 	return (
-		<div className='Tasklist'>
+		<div 
+		onDragStart={(e)=>{}}
+		onDragLeave={(e)=>{}}
+		onDragEnd={(e)=>{}}
+		draggable={true}
+		className='Tasklist'>
 			<header style={{backgroundColor:`${list.color}`}}>
-				<div>{list.name}</div>
-				<img src="/img/execloser.svg" alt="exe" />
+				<div className='list-name'>{list.name}</div>
+				<div className='close-list' onClick={()=>{removeList(index)}}><img   src="/img/execloser.svg" alt="exe" /></div>
 			</header>
 			<div className=' addTask'>
 				<input
