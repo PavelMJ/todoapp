@@ -4,9 +4,10 @@ import { Reorder } from 'framer-motion';
 
 export default function Tasklist({ list }) {
 	const [cnt, setCnt] = useState(1)
-	console.log(list);
+
 	const [newTask, setNewTask] = useState('')
 	const [tasks, setTasks] = useState([{ id: 0, task: 'lets do it', complete: false }])
+
 	const addTask = (task, id) => {
 		let newTask
 		if (task !== '') {
