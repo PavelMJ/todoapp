@@ -14,7 +14,7 @@ export default function Creator({addList, createList}) {
     { value: '#d257b1', label: <div className='color-preview violett'></div> }
   ];
 
-	const [selectedColor, setSelectedColor] = useState(null);
+	const [selectedColor, setSelectedColor] = useState('#4663d7');
 // console.log(selectedColor.value);
   const handleChange = (colorOptions) => {
     setSelectedColor(colorOptions);
@@ -47,7 +47,8 @@ export default function Creator({addList, createList}) {
 			if(event.key === 'Escape') createList()
 		}
 
-		document.addEventListener('keydown',handleEscape)
+	
+		document.addEventListener('keydown',handleEscape);
 
 		return ()=>{
 			document.removeEventListener('keydown',handleEscape)
@@ -55,15 +56,19 @@ export default function Creator({addList, createList}) {
 	},[])
 
 	function handleEnter(event){
-		if(event.key==="Enter"){
-			addList(name)
+		if(event.key==="Enter" ){
+			addList(name,selectedColor.value || '#4663d7')
 		}
 	}
+
+
+	
 	return (
-		<div className='Creator overlay'>
+		<div className='Creator'>
 			<img className='close' src="/img/close.svg" alt="close" onClick={createList} />
+			<div className='overlay'></div>
 			<div className='input2 flexRow'>
-			<input onKeyDown={(e)=>{handleEnter(e)}} onChange={(event)=>{setName(event.target.value)}} className='input3'  type="text" placeholder='create new task list' />
+			<input onKeyDown={(e)=>{handleEnter(e)}}  onChange={(event)=>{setName(event.target.value)}} className='input3'  type="text" placeholder='create new task list' />
 			{selectedColor && <button className='button2' onClick={()=>{addList(name,selectedColor.value)}}>+</button>}
 			<Select
 				placeholder='Select color'

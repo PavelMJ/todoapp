@@ -3,9 +3,10 @@ import './App.css';
 import Tasklist from './components/Tasklist';
 import Creator from './components/Creator';
 import Header from './components/Header';
+import Hamburger from './components/Hamburger';
 
 function App() {
-	const [taskLists, setTaskLists] = useState([{ id: 1, name: 'My tasks', color: '#ce4cae' }])
+	const [taskLists, setTaskLists] = useState([])
 	const [listName, setListName] = useState(false)
 	const [idCnt, setIdCnt] = useState(1)
 
@@ -43,15 +44,18 @@ function App() {
 
 	return (
 		<div className="App">
-			<Header createList={createList} />
 			<div>
 				{listName && <Creator addList={addList} setListName={setListName} createList={createList} />}
+			</div>
+			<div className='flexRow'>
+			<Header createList={createList} />
+			<Hamburger/>
 			</div>
 			<div className='Content'>
 				{taskLists.map((list, index) => {
 					return <Tasklist
 						removeList={removeList}
-						key={index}
+						key={list.id}
 						index={index}
 						list={list}
 						updateList={updateList}

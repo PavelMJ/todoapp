@@ -3,6 +3,7 @@ import { Reorder } from 'framer-motion';
 
 
 export default function Task({ task, index, doneTask, removeTask }) {
+
 	const [done, setDone] = useState(false)
 	return (
 		<Reorder.Item value={task} >

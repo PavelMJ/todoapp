@@ -3,11 +3,11 @@ import Task from './Task'
 import { Reorder } from 'framer-motion';
 
 export default function Tasklist({ list, index, updateList, removeList }) {
-	const [cnt, setCnt] = useState(1)
+	const [cnt, setCnt] = useState(2)
 
 	const [newTask, setNewTask] = useState('')
-	const [tasks, setTasks] = useState([{ id: 0, task: 'lets do it', complete: false }])
-
+	const [tasks, setTasks] = useState([])
+	console.log(newTask);
 	const addTask = (task, id) => {
 		let newTask
 		if (task !== '') {
@@ -34,19 +34,15 @@ export default function Tasklist({ list, index, updateList, removeList }) {
 	}
 
 
-	function handleEnter(event) {
-		if (event.key === "Enter") {
+	function handleEnter(e) {
+		if (e.key === "Enter") {
 			addTask(newTask, cnt);
 			setNewTask('')
 		}
 	}
 	return (
 		<div 
-		onDragStart={(e)=>{}}
-		onDragLeave={(e)=>{}}
-		onDragEnd={(e)=>{}}
-		draggable={true}
-		className='Tasklist'>
+			className='Tasklist'>
 			<header style={{backgroundColor:`${list.color}`}}>
 				<div className='list-name'>{list.name}</div>
 				<div className='close-list' onClick={()=>{removeList(index)}}><img   src="/img/execloser.svg" alt="exe" /></div>
