@@ -1,0 +1,28 @@
+.Login{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+}
+.signin-window{
+	opacity: 0.8;
+	width: 400px;
+	height: 400px;
+	background-color: rgb(11, 28, 64);
+	border-radius: 12px;
+	border: 2px solid rgb(141, 192, 231);
+}
+
+.login-input{
+	width: 260px;
+	height: 32px ;
+	margin: 15px;
+}
+
+.button5{
+	margin: 20px 10px;
+	width:90px;
+	height: 30px;
+}
+

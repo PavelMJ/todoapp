@@ -1,18 +1,22 @@
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import './App.css';
-import Tasklist from './components/Tasklist';
+import Header from './components/Header'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Workspace from './components/Workspace';
+import Login from './components/Login';
+import Register from './components/Register';
 import Creator from './components/Creator';
-import Header from './components/Header';
-import Hamburger from './components/Hamburger';
 
 function App() {
 	const [taskLists, setTaskLists] = useState([])
-	const [listName, setListName] = useState(false)
 	const [idCnt, setIdCnt] = useState(1)
+	const [listName, setListName] = useState(false)
+	const [user, setUser]=useState({})
+	const [logedIn, setLogedIn]= useState(false)
 
 
-	const createList = () => {
-		
+	const showCreator = () => {
 		setListName(!listName)
 	}
 
@@ -27,8 +31,7 @@ function App() {
 			}
 
 			setTaskLists([...taskLists, newList])
-			setListName(!listName)
-
+			showCreator()
 		}
 	}
 
@@ -42,29 +45,61 @@ function App() {
 
 	}
 
+	const logEnter = (user, password)=>{
+		let theUser = {
+			user,
+			password,
+		}
+		setUser(theUser)
+	}
+
+	const regEnter = (data)=>{
+		let userData = {
+			userName:data.userName,
+			email:data.email
+		}
+
+		setUser(userData)
+	}
+
+	useEffect(()=>{
+		fetch(`db/${user.userName}`)
+		.then(res=> res.json())
+		.then(data=>{
+			if(data){
+				setTaskLists([...data])
+			setLogedIn(true)}
+			else{
+				setTaskLists([])
+				setLogedIn(false)
+			}
+		})
+		
+	},[user])
+
+
+	const logout=()=>{
+		setUser({})
+	}
+
+
+
+
+
 
 	return (
 		<div className="App">
-			<div>
-				{listName && <Creator addList={addList} setListName={setListName} createList={createList} />}
-			</div>
-			<div className='flexRow'>
-			<Header createList={createList} />
-			<Hamburger/>
-			</div>
-			<div className='Content'>
-				{taskLists.map((list, index) => {
-					return <Tasklist
-						removeList={removeList}
-						key={list.id}
-						index={index}
-						list={list}
-						updateList={updateList}
-
-					/>
-				})
-				}
-			</div>
+			<BrowserRouter>
+				<div>
+					{listName && <Creator addList={addList} showCreator={showCreator} />}
+				</div>
+				<Header showCreator={showCreator} logedIn={logedIn} logout={logout}/>
+				<Routes>
+					<Route path='/' element={<Login logEnter={logEnter} />} />
+					<Route path='/register' element={<Register regEnter={regEnter} />} />
+					<Route path='/workspace' element={<Workspace removeList={removeList} updateList={updateList} taskLists={taskLists} />} />
+				</Routes>
+			</BrowserRouter>
 
 		</div>
 	);

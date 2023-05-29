@@ -218,6 +218,28 @@ header{
 	font-size: 42px;
 	margin: 0 10px;
 }
+
+.button3{
+	cursor:pointer ;
+	font-size: 15px;
+	width: 100px;
+	height: 35px;
+	border: none;
+	padding: 5px;
+	margin:  20px 0;
+	border-radius: 5px;
+	background-color: rgb(208, 208, 208);
+	transition: all 0.1s ease;
+
+}
+
+.button3:hover{
+	background-color: rgb(252, 251, 251);
+}
+
+.button3:active{
+	transform: translateY(2px);
+}
  
 .create-button{
 	cursor: pointer;
