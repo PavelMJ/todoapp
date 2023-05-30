@@ -12,7 +12,7 @@ export default function Register({regEnter}) {
 
 	const createUser =(userName, password, email)=>{
 
-		fetch('/db/users',{
+		fetch('/db/register',{
 			headers:{"Accept": "application/json", "Content-Type": "application/json"},
 			method: 'post',
 			body: JSON.stringify({
@@ -31,7 +31,7 @@ export default function Register({regEnter}) {
 			<div className='signin-window flexColumn flexCenter'>
 				<h2 style={{ color: "white" }}>LOG IN</h2>
 				<input onChange={(e) => { setUserName(e.target.value) }} className='login-input' type="text" placeholder='username' value={userName} />
-				<input onChange={(e) => { setEmail(e.target.value) }} className='login-input' type="text" placeholder='password' value={email} />
+				<input onChange={(e) => { setEmail(e.target.value) }} className='login-input' type="text" placeholder='email' value={email} />
 				<input onChange={(e) => { setPassword(e.target.value) }} className='login-input' type="password" placeholder='password' value={password} />
 				<div className='flexRow'>
 					<button onClick={()=>{

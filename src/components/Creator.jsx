@@ -4,7 +4,7 @@ import Select from 'react-select'
 
 
 
-export default function Creator({addList, createList}) {
+export default function Creator({addList, showCreator}) {
 
 	const colorOptions = [
     { value: '#4663d7', label: <div className='color-preview blue'></div> },
@@ -15,7 +15,7 @@ export default function Creator({addList, createList}) {
   ];
 
 	const [selectedColor, setSelectedColor] = useState('#4663d7');
-// console.log(selectedColor.value);
+console.log(selectedColor.value);
   const handleChange = (colorOptions) => {
     setSelectedColor(colorOptions);
   };
@@ -44,7 +44,7 @@ export default function Creator({addList, createList}) {
 	useEffect(()=>{
 
 		function handleEscape(event){
-			if(event.key === 'Escape') createList()
+			if(event.key === 'Escape') showCreator()
 		}
 
 	
@@ -57,7 +57,7 @@ export default function Creator({addList, createList}) {
 
 	function handleEnter(event){
 		if(event.key==="Enter" ){
-			addList(name,selectedColor.value || '#4663d7')
+			addList(name, selectedColor.value || '#4663d7')
 		}
 	}
 
@@ -65,11 +65,11 @@ export default function Creator({addList, createList}) {
 	
 	return (
 		<div className='Creator'>
-			<img className='close' src="/img/close.svg" alt="close" onClick={createList} />
+			<img className='close' src="/img/close.svg" alt="close" onClick={showCreator} />
 			<div className='overlay'></div>
 			<div className='input2 flexRow'>
 			<input onKeyDown={(e)=>{handleEnter(e)}}  onChange={(event)=>{setName(event.target.value)}} className='input3'  type="text" placeholder='create new task list' />
-			{selectedColor && <button className='button2' onClick={()=>{addList(name,selectedColor.value)}}>+</button>}
+			{selectedColor && <button className='button2' onClick={()=>{addList(name, selectedColor.value)}}>+</button>}
 			<Select
 				placeholder='Select color'
         value={selectedColor}

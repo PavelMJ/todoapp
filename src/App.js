@@ -12,8 +12,10 @@ function App() {
 	const [taskLists, setTaskLists] = useState([])
 	const [idCnt, setIdCnt] = useState(1)
 	const [listName, setListName] = useState(false)
-	const [user, setUser]=useState({})
-	const [logedIn, setLogedIn]= useState(false)
+	const [user, setUser] = useState({})
+	const [logedIn, setLogedIn] = useState(false)
+	console.log(user);
+	console.log(taskLists);
 
 
 	const showCreator = () => {
@@ -40,45 +42,71 @@ function App() {
 		setTaskLists([...taskLists])
 	}
 
-	const removeList = (index)=>{
+	const removeList = (index) => {
 		setTaskLists([...taskLists.filter(val => val !== taskLists[index])])
 
 	}
 
-	const logEnter = (user, password)=>{
+	const logEnter = (userName, password) => {
 		let theUser = {
-			user,
+			userName,
 			password,
 		}
 		setUser(theUser)
+		setLogedIn(!logedIn)
 	}
 
-	const regEnter = (data)=>{
+	const regEnter = (data) => {
 		let userData = {
-			userName:data.userName,
-			email:data.email
+			userName: data.userName,
+			email: data.email
 		}
 
 		setUser(userData)
+		setLogedIn(!logedIn)
 	}
 
-	useEffect(()=>{
-		fetch(`db/${user.userName}`)
-		.then(res=> res.json())
-		.then(data=>{
-			if(data){
-				setTaskLists([...data])
-			setLogedIn(true)}
-			else{
-				setTaskLists([])
-				setLogedIn(false)
+	useEffect(() => {
+		const setData =()=>{
+			if(user.userName){
+				fetch(`db/${user.userName}`)
+			.then(res => res.json())
+			.then(data => {
+				if (data) {
+					setTaskLists([...data.data])
+					setLogedIn(true)
+				}
+				else {
+					setTaskLists([])
+					setLogedIn(false)
+				}
+			})
 			}
-		})
+		}
+		setData()
+	}, [user])
+
+	useEffect(() => {
+		const updateData=()=>{
+			if(user.length>1){
+				fetch('/db/update', {
+					headers: { "Accept": "application/json", "Content-Type": "application/json" },
+					method: 'post',
+					body: JSON.stringify({
+						userName: user.userName,
+						data: taskLists
+					})
+				}).then(res =>  res.json())
+					.then((data) => console.log(data))
+					.catch(err => { console.error(err) })
+			}
+		}
+		updateData()
 		
-	},[user])
+	}, [taskLists])
 
 
-	const logout=()=>{
+	const logout = () => {
 		setUser({})
 	}
 
@@ -93,7 +121,7 @@ function App() {
 				<div>
 					{listName && <Creator addList={addList} showCreator={showCreator} />}
 				</div>
-				<Header showCreator={showCreator} logedIn={logedIn} logout={logout}/>
+				<Header showCreator={showCreator} logedIn={logedIn} logout={logout} />
 				<Routes>
 					<Route path='/' element={<Login logEnter={logEnter} />} />
 					<Route path='/register' element={<Register regEnter={regEnter} />} />

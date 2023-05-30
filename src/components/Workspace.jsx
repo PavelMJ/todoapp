@@ -1,6 +1,5 @@
 import React from 'react'
 import Tasklist from './Tasklist';
-import Hamburger from './Hamburger';
 export default function Workspace({taskLists,removeList,updateList}) {
 
 	
@@ -8,7 +7,7 @@ export default function Workspace({taskLists,removeList,updateList}) {
 		<div className='Workspace'>
 			
 			<div className='flexRow'>
-				<Hamburger />
+				
 			</div>
 			<div className='Content'>
 				{taskLists.map((list, index) => {
