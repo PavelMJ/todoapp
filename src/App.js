@@ -18,6 +18,22 @@ function App() {
 	console.log(taskLists);
 
 
+	const updateData=()=>{
+			
+		fetch('/db/update', {
+			headers: { "Accept": "application/json", "Content-Type": "application/json" },
+			method: 'post',
+			body: JSON.stringify({
+				userName: user.userName,
+				data: taskLists
+			})
+		}).then(res =>  res.json())
+			.then((data) => console.log(data))
+			.catch(err => { console.error(err) })
+	
+}
+
+
 	const showCreator = () => {
 		setListName(!listName)
 	}
@@ -33,6 +49,7 @@ function App() {
 			}
 
 			setTaskLists([...taskLists, newList])
+			updateData()
 			showCreator()
 		}
 	}
@@ -40,10 +57,12 @@ function App() {
 	const updateList = (task, index) => {
 		taskLists[index].tasks.push(task)
 		setTaskLists([...taskLists])
+		updateData()
 	}
 
 	const removeList = (index) => {
 		setTaskLists([...taskLists.filter(val => val !== taskLists[index])])
+		updateData()
 
 	}
 
@@ -61,6 +80,7 @@ function App() {
 			userName: data.userName,
 			email: data.email
 		}
+		updateData()
 
 		setUser(userData)
 		setLogedIn(!logedIn)
@@ -86,28 +106,15 @@ function App() {
 		setData()
 	}, [user])
 
-	useEffect(() => {
-		const updateData=()=>{
-			if(user.length>1){
-				fetch('/db/update', {
-					headers: { "Accept": "application/json", "Content-Type": "application/json" },
-					method: 'post',
-					body: JSON.stringify({
-						userName: user.userName,
-						data: taskLists
-					})
-				}).then(res =>  res.json())
-					.then((data) => console.log(data))
-					.catch(err => { console.error(err) })
-			}
-		}
-		updateData()
-		
-	}, [taskLists])
+	const uploadData = (data)=>{
+		setTaskLists(data)
+	}
+
 
 
 	const logout = () => {
 		setUser({})
+		setTaskLists([])
 	}
 
 
@@ -123,7 +130,7 @@ function App() {
 				</div>
 				<Header showCreator={showCreator} logedIn={logedIn} logout={logout} />
 				<Routes>
-					<Route path='/' element={<Login logEnter={logEnter} />} />
+					<Route path='/' element={<Login logEnter={logEnter} uploadData={uploadData} />} />
 					<Route path='/register' element={<Register regEnter={regEnter} />} />
 					<Route path='/workspace' element={<Workspace removeList={removeList} updateList={updateList} taskLists={taskLists} />} />
 				</Routes>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './css/login.css'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login({logEnter}) {
+export default function Login({logEnter, uploadData}) {
 	const nav = useNavigate()
 	const [userName, setUserName]=useState('')
 	const[password,setPassword]= useState('')
@@ -20,14 +20,15 @@ export default function Login({logEnter}) {
 		.then((data)=>{
 			if(data.success){
 				logEnter(userName, password);
+				uploadData(data.taskLists.data);
 				nav('/workspace')
+			}
+
+			else{
+
 			}
 		}).catch(err=>{console.error(err)})
 	}
-
-
-
-
 
 
 	
