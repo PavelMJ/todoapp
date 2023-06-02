@@ -1,4 +1,5 @@
 body {
+		position: relative;
 		background-image: url('/public/img/back.png');
 		background-size: cover;
 		background-repeat: no-repeat;
