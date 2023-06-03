@@ -14,8 +14,7 @@ export default function Creator({addList, showCreator}) {
     { value: '#d257b1', label: <div className='color-preview violett'></div> }
   ];
 
-	const [selectedColor, setSelectedColor] = useState('#4663d7');
-console.log(selectedColor.value);
+	const [selectedColor, setSelectedColor] = useState({});
   const handleChange = (colorOptions) => {
     setSelectedColor(colorOptions);
   };
@@ -69,7 +68,7 @@ console.log(selectedColor.value);
 			<div className='overlay'></div>
 			<div className='input2 flexRow'>
 			<input onKeyDown={(e)=>{handleEnter(e)}}  onChange={(event)=>{setName(event.target.value)}} className='input3'  type="text" placeholder='create new task list' />
-			{selectedColor && <button className='button2' onClick={()=>{addList(name, selectedColor.value)}}>+</button>}
+			{selectedColor && <button className='button2' onClick={()=>{addList(name, selectedColor.value || '#4663d7')}}>+</button>}
 			<Select
 				placeholder='Select color'
         value={selectedColor}

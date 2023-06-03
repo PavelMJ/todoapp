@@ -1,6 +1,6 @@
 import React from 'react'
 import Tasklist from './Tasklist';
-export default function Workspace({taskLists,removeList,updateList}) {
+export default function Workspace({setTaskLists,taskLists,removeList,addTask, removeTask,doneTask}) {
 
 	
 	return (
@@ -12,11 +12,15 @@ export default function Workspace({taskLists,removeList,updateList}) {
 			<div className='Content'>
 				{taskLists.map((list, index) => {
 					return <Tasklist
+					setTaskLists={setTaskLists}
 						removeList={removeList}
 						key={list.id}
 						index={index}
 						list={list}
-						updateList={updateList}
+						addTask={addTask}
+						removeTask={removeTask}
+						doneTask={doneTask}
+
 
 					/>
 				})

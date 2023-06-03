@@ -1,42 +1,15 @@
 import React, { useState } from 'react'
 import Task from './Task'
-import { Reorder } from 'framer-motion';
 
-export default function Tasklist({ list, index, updateList, removeList }) {
-	const [cnt, setCnt] = useState(2)
+export default function Tasklist({ list, index, removeList,addTask,removeTask, doneTask}) {
+	const [cnt, setCnt] = useState(5)
 
 	const [newTask, setNewTask] = useState('')
-	const [tasks, setTasks] = useState([])
-	console.log(newTask);
-	const addTask = (task, id) => {
-		let newTask
-		if (task !== '') {
-			setCnt(cnt + 1)
-			newTask = {
-				id,
-				task,
-				complete: false,
-			}
-			setTasks([...tasks, newTask])
-			updateList(task,index)
-		}
-	}
-
-	const removeTask = (index) => {
-		setTasks(tasks.filter(task => task !== tasks[index]))
-		
-	}
-
-	const doneTask = (index) => {
-		tasks[index].complete = !tasks[index].complete
-		setTasks([...tasks])
-
-	}
 
 
 	function handleEnter(e) {
 		if (e.key === "Enter") {
-			addTask(newTask, cnt);
+			addTask(newTask, cnt, index);
 			setNewTask('')
 		}
 	}
@@ -56,22 +29,23 @@ export default function Tasklist({ list, index, updateList, removeList }) {
 					onChange={(e) => { setNewTask(e.target.value) }}
 					value={newTask} />
 				<div onClick={() => {
-					addTask(newTask, cnt);
+					addTask(newTask, cnt, index);
 					setNewTask('')
+					setCnt(cnt+1)
 				}} className='button'>+</div>
 			</div>
 			<div className='conteiner'>
-				<Reorder.Group style={{ listStyle: 'none', margin: '0', padding: '0' }} axis="y" values={tasks} onReorder={setTasks}>
-					{tasks.map((task, index) => (
+					{list.tasks.map((task, i) => (
 						 <Task
 							key={task.id}
 							task={task}
-							index={index}
+							taskIndex={i}
+							listIndex={index}
 							removeTask={removeTask}
 							doneTask={doneTask}
+
 						/>
 					))}
-				</Reorder.Group>
 			</div>
 		</div>
 	)

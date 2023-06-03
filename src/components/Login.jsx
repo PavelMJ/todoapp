@@ -2,32 +2,35 @@ import React, { useState } from 'react'
 import './css/login.css'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login({logEnter, uploadData}) {
+export default function Login({logEnter}) {
+	const [message, setMessage] = useState(false)
 	const nav = useNavigate()
 	const [userName, setUserName]=useState('')
 	const[password,setPassword]= useState('')
 
 	const login = (userName, password)=>{
-		fetch('db/login',{
-			headers:{"Accept": "application/json", "Content-Type": "application/json"},
-			method:"post",
-			body:JSON.stringify({
-				userName,
-				password
-			})
-		})
-		.then(res=>res.json())
-		.then((data)=>{
-			if(data.success){
-				logEnter(userName, password);
-				uploadData(data.taskLists.data);
-				nav('/workspace')
-			}
+		// fetch('db/login',{
+		// 	headers:{"Accept": "application/json", "Content-Type": "application/json"},
+		// 	method:"post",
+		// 	body:JSON.stringify({
+		// 		userName,
+		// 		password
+		// 	})
+		// })
+		// .then(res=>res.json())
+		// .then((data)=>{
+		// 	if(data.success){
+		// 		logEnter(userName, password);
+		// 		nav('/workspace')
+		// 	}
 
-			else{
+		// 	else{
+		// 		setMessage(true)
+		// 	}
+		// }).catch(err=>{console.error(err)})
+		nav('/workspace')
+		logEnter(userName, password);
 
-			}
-		}).catch(err=>{console.error(err)})
 	}
 
 
