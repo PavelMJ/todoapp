@@ -72,21 +72,21 @@ function App() {
 
 			console.log('upload data');
 
-			if (user.userName) {
-				fetch(`db/${user.userName}`)
-					.then(res => res.json())
-					.then(data => {
-						if (data) {
-							console.log(data, 'resieved data');
-							setTaskLists([...data.data])
-							setLogedIn(true)
-						}
-						else {
-							setTaskLists([])
-							setLogedIn(false)
-						}
-					})
-			}
+			// if (user.userName) {
+			// 	fetch(`db/${user.userName}`)
+			// 		.then(res => res.json())
+			// 		.then(data => {
+			// 			if (data) {
+			// 				console.log(data, 'resieved data');
+			// 				setTaskLists([...data.data])
+			// 				setLogedIn(true)
+			// 			}
+			// 			else {
+			// 				setTaskLists([])
+			// 				setLogedIn(false)
+			// 			}
+			// 		})
+			// }
 		}
 		uploadData()
 	}, [user])
@@ -97,18 +97,18 @@ function App() {
 		const updateData = () => {
 			console.log("updateData");
 
-			if(taskLists.length>0){
-				fetch('db/update', {
-					headers: { "Accept": "application/json", "Content-Type": "application/json" },
-					method: 'post',
-					body: JSON.stringify({
-						userName: user.userName,
-						data: taskLists
-					})
-				}).then(res => res.json())
-					.then((data) => console.log(data))
-					.catch(err => { console.error(err) })
-			}
+			// if(taskLists.length>0){
+			// 	fetch('db/update', {
+			// 		headers: { "Accept": "application/json", "Content-Type": "application/json" },
+			// 		method: 'post',
+			// 		body: JSON.stringify({
+			// 			userName: user.userName,
+			// 			data: taskLists
+			// 		})
+			// 	}).then(res => res.json())
+			// 		.then((data) => console.log(data))
+			// 		.catch(err => { console.error(err) })
+			// }
 		
 
 		}
