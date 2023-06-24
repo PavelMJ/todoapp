@@ -14,10 +14,18 @@ function App() {
 	const [listName, setListName] = useState(false)
 	const [user, setUser] = useState({})
 	const [logedIn, setLogedIn] = useState(false)
+	const [allUsers, setAllUsers] = useState([])
 
 	// console.log(user);
 	console.log(taskLists, 'taskList');
-
+ const AddUser =(userName, password, email)=>{
+	let newUser={
+		userName,
+		password,
+		email
+	}
+	setAllUsers([...allUsers, newUser])
+ }
 
 
 	
@@ -56,10 +64,20 @@ function App() {
 		setLogedIn(!logedIn)
 	}
 
-	const regEnter = (data) => {
+	// const regEnter = (data) => {
+	// 	let userData = {
+	// 		userName: data.userName,
+	// 		email: data.email
+	// 	}
+
+	// 	setUser(userData)
+	// 	setLogedIn(!logedIn)
+	// }
+
+	const regEnter = (userName, email) => {
 		let userData = {
-			userName: data.userName,
-			email: data.email
+			userName,
+			email,
 		}
 
 		setUser(userData)
@@ -159,7 +177,7 @@ function App() {
 				<Header showCreator={showCreator} logedIn={logedIn} logout={logout} />
 				<Routes>
 					<Route path='/' element={<Login logEnter={logEnter} />} />
-					<Route path='/register' element={<Register regEnter={regEnter} />} />
+					<Route path='/register' element={<Register regEnter={regEnter} AddUser={AddUser} />} />
 					<Route path='/workspace' element={<Workspace
 						setTaskLists={setTaskLists}
 						removeList={removeList}

@@ -3,27 +3,30 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Register({regEnter}) {
+export default function Register({regEnter, AddUser}) {
 	const nav = useNavigate()
 
 	const [userName, setUserName] = useState('')
 	const [password, setPassword] = useState('')
 	const [email, setEmail] = useState('')
 
-	const createUser =(userName, password, email)=>{
+	const createUser =(userName,password, email)=>{
 
-		fetch('/db/register',{
-			headers:{"Accept": "application/json", "Content-Type": "application/json"},
-			method: 'post',
-			body: JSON.stringify({
-				userName,
-				password,
-				email
-			})
-		}).then((res)=>{return res.json()
-		}).then((data)=>{console.log(data);regEnter(data);nav('/worksrace')
-		}).catch(err=>{console.error(err)
-		})
+		// fetch('/db/register',{
+		// 	headers:{"Accept": "application/json", "Content-Type": "application/json"},
+		// 	method: 'post',
+		// 	body: JSON.stringify({
+		// 		userName,
+		// 		password,
+		// 		email
+		// 	})
+		// }).then((res)=>{return res.json()
+		// }).then((data)=>{console.log(data);regEnter(data);nav('/worksrace')
+		// }).catch(err=>{console.error(err)
+		// })
+		AddUser(userName,password, email)
+		regEnter(userName, email)
+		nav('/workspace')
 	}
 
 	return (
