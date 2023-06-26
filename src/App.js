@@ -10,50 +10,49 @@ import Creator from './components/Creator';
 
 function App() {
 	const [taskLists, setTaskLists] = useState([])
-	const [idCnt, setIdCnt] = useState(1)
+	// const [idCnt, setIdCnt] = useState(1)
 	const [listName, setListName] = useState(false)
 	const [user, setUser] = useState({})
 	const [logedIn, setLogedIn] = useState(false)
 	const [allUsers, setAllUsers] = useState([])
 
-	// console.log(user);
-	console.log(taskLists, 'taskList');
- const AddUser =(userName, password, email)=>{
-	let newUser={
-		userName,
-		password,
-		email
+
+	const AddUser = (userName, password, email) => {
+		let newUser = {
+			userName,
+			password,
+			email
+		}
+		setAllUsers([...allUsers, newUser])
 	}
-	setAllUsers([...allUsers, newUser])
- }
 
 
-	
+
 
 	const showCreator = () => {
 		setListName(!listName)
 	}
 
-	const addList = (name, color) => {
-		setIdCnt(idCnt + 1)
-		if (color && name !== '') {
-			let newList = {
-				id: idCnt,
-				name,
-				color,
-				tasks: []
-			}
+	// const addList = (name, color) => {
+	// 	setIdCnt(idCnt + 1)
+	// 	if (color && name !== '') {
+	// 		let newList = {
+	// 			id: idCnt,
+	// 			name,
+	// 			color,
+	// 			tasks: []
+	// 		}
 
-			setTaskLists([...taskLists, newList])
-			showCreator()
-		}
-	}
+	// 		setTaskLists([...taskLists, newList])
+	// 		showCreator()
+	// 	}
+	// }
 
 
-	const removeList = (index) => {
-		setTaskLists([...taskLists.filter(val => val !== taskLists[index])])
+	// const removeList = (index) => {
+	// 	setTaskLists([...taskLists.filter(val => val !== taskLists[index])])
 
-	}
+	// }
 
 	const logEnter = (userName, password) => {
 		let theUser = {
@@ -85,7 +84,7 @@ function App() {
 	}
 
 	useEffect(() => {
-		
+
 		const uploadData = () => {
 
 			console.log('upload data');
@@ -111,7 +110,7 @@ function App() {
 
 
 	useEffect(() => {
-		
+
 		const updateData = () => {
 			console.log("updateData");
 
@@ -127,7 +126,7 @@ function App() {
 			// 		.then((data) => console.log(data))
 			// 		.catch(err => { console.error(err) })
 			// }
-		
+
 
 		}
 
@@ -142,18 +141,17 @@ function App() {
 		setLogedIn(!logedIn)
 	}
 
-	const addTask = (task, id, index) => {
-		let newTask
-		if (task !== '') {
-			newTask = {
-				id,
-				task,
-				complete: false,
-			}
-			taskLists[index].tasks.push(newTask)
-			setTaskLists([...taskLists])
-		}
-	}
+	// const addTask = (task, id, index) => {
+	// 	if (task !== '') {
+	// 		let newTask = {
+	// 			id,
+	// 			task,
+	// 			complete: false,
+	// 		}
+	// 		taskLists[index].tasks.push(newTask)
+	// 		setTaskLists([...taskLists])
+	// 	}
+	// }
 
 	const removeTask = (listIndex, taskIndex) => {
 		taskLists[listIndex].tasks = taskLists[listIndex].tasks.filter(task => task !== taskLists[listIndex].tasks[taskIndex])
@@ -172,18 +170,14 @@ function App() {
 		<div className="App">
 			<BrowserRouter>
 				<div>
-					{listName && <Creator addList={addList} showCreator={showCreator} />}
+					{listName && <Creator showCreator={showCreator} />}
 				</div>
 				<Header showCreator={showCreator} logedIn={logedIn} logout={logout} />
 				<Routes>
 					<Route path='/' element={<Login logEnter={logEnter} />} />
 					<Route path='/register' element={<Register regEnter={regEnter} AddUser={AddUser} />} />
 					<Route path='/workspace' element={<Workspace
-						setTaskLists={setTaskLists}
-						removeList={removeList}
 						removeTask={removeTask}
-						taskLists={taskLists}
-						addTask={addTask}
 						doneTask={doneTask}
 					/>} />
 				</Routes>

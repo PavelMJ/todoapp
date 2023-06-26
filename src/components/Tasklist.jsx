@@ -1,24 +1,26 @@
 import React, { useState } from 'react'
 import Task from './Task'
+import { removeList, addTask } from '../redux/taskSlice'
+import { useDispatch } from 'react-redux'
 
-export default function Tasklist({ list, index, removeList,addTask,removeTask, doneTask}) {
-	const [cnt, setCnt] = useState(5)
+export default function Tasklist({ list, index, removeTask, doneTask }) {
 
+	const dispatch = useDispatch()
 	const [newTask, setNewTask] = useState('')
 
 
 	function handleEnter(e) {
 		if (e.key === "Enter") {
-			addTask(newTask, cnt, index);
+			addTask(newTask, index);
 			setNewTask('')
 		}
 	}
 	return (
-		<div 
+		<div
 			className='Tasklist'>
-			<header style={{backgroundColor:`${list.color}`}}>
+			<header style={{ backgroundColor: `${list.color}` }}>
 				<div className='list-name'>{list.name}</div>
-				<div className='close-list' onClick={()=>{removeList(index)}}><img   src="/img/execloser.svg" alt="exe" /></div>
+				<div className='close-list' onClick={() => { dispatch(removeList({ index })) }}><img src="/img/execloser.svg" alt="exe" /></div>
 			</header>
 			<div className=' addTask'>
 				<input
@@ -29,23 +31,23 @@ export default function Tasklist({ list, index, removeList,addTask,removeTask, d
 					onChange={(e) => { setNewTask(e.target.value) }}
 					value={newTask} />
 				<div onClick={() => {
-					addTask(newTask, cnt, index);
+					dispatch(addTask({ newTask, index }));
 					setNewTask('')
-					setCnt(cnt+1)
+
 				}} className='button'>+</div>
 			</div>
 			<div className='conteiner'>
-					{list.tasks.map((task, i) => (
-						 <Task
-							key={task.id}
-							task={task}
-							taskIndex={i}
-							listIndex={index}
-							removeTask={removeTask}
-							doneTask={doneTask}
+				{list.tasks.map((task, i) => (
+					<Task
+						key={task.id}
+						task={task}
+						taskIndex={i}
+						listIndex={index}
+						removeTask={removeTask}
+						doneTask={doneTask}
 
-						/>
-					))}
+					/>
+				))}
 			</div>
 		</div>
 	)

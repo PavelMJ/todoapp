@@ -11,7 +11,7 @@ export default function Task({ task,listIndex, taskIndex, doneTask, removeTask }
 					doneTask(listIndex, taskIndex)
 				}}>
 					{done && <img src="/img/done.svg" alt="" />}
-					{done === false && <img src="/img/undone.svg" alt="" />}
+					{done === false && <img src="/img/undone.svg"   alt="" />}
 				</div>
 				<div className='title' style={{ textDecoration: `${done ? 'line-through' : 'none'}` }}>{task.task}</div>
 				<div className='del' onClick={() => { removeTask(listIndex,taskIndex) }}>
