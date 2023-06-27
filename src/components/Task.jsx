@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { removeTask } from '../redux/taskSlice'
+import { removeTask, doneTask } from '../redux/taskSlice'
 import { useDispatch } from 'react-redux'
 
 
-export default function Task({ task, listIndex, taskIndex, doneTask }) {
+export default function Task({ task, listIndex, taskIndex }) {
 	const dispatch = useDispatch()
 
 	const [done, setDone] = useState(false)
@@ -11,7 +11,7 @@ export default function Task({ task, listIndex, taskIndex, doneTask }) {
 		<div className='Task flexSpBetwean'>
 			<div className='done' onClick={() => {
 				setDone(!done);
-				doneTask(listIndex, taskIndex)
+				dispatch(doneTask({ listIndex, taskIndex }))
 			}}>
 				{done && <img src="/img/done.svg" alt="" />}
 				{done === false && <img src="/img/undone.svg" alt="" />}

@@ -26,33 +26,10 @@ function App() {
 		setAllUsers([...allUsers, newUser])
 	}
 
-
-
-
 	const showCreator = () => {
 		setListName(!listName)
 	}
 
-	// const addList = (name, color) => {
-	// 	setIdCnt(idCnt + 1)
-	// 	if (color && name !== '') {
-	// 		let newList = {
-	// 			id: idCnt,
-	// 			name,
-	// 			color,
-	// 			tasks: []
-	// 		}
-
-	// 		setTaskLists([...taskLists, newList])
-	// 		showCreator()
-	// 	}
-	// }
-
-
-	// const removeList = (index) => {
-	// 	setTaskLists([...taskLists.filter(val => val !== taskLists[index])])
-
-	// }
 
 	const logEnter = (userName, password) => {
 		let theUser = {
@@ -134,35 +111,19 @@ function App() {
 	}, [taskLists])
 
 
-
 	const logout = () => {
 		setUser({})
 		setTaskLists([])
 		setLogedIn(!logedIn)
 	}
 
-	// const addTask = (task, id, index) => {
-	// 	if (task !== '') {
-	// 		let newTask = {
-	// 			id,
-	// 			task,
-	// 			complete: false,
-	// 		}
-	// 		taskLists[index].tasks.push(newTask)
-	// 		setTaskLists([...taskLists])
-	// 	}
-	// }
 
-	// const removeTask = (listIndex, taskIndex) => {
-	// 	taskLists[listIndex].tasks = taskLists[listIndex].tasks.filter(task => task !== taskLists[listIndex].tasks[taskIndex])
+
+	// const doneTask = (listIndex, taskindex) => {
+	// 	taskLists[listIndex].tasks[taskindex].complete = !taskLists[listIndex].tasks[taskindex].complete
 	// 	setTaskLists([...taskLists])
+
 	// }
-
-	const doneTask = (listIndex, taskindex) => {
-		taskLists[listIndex].tasks[taskindex].complete = !taskLists[listIndex].tasks[taskindex].complete
-		setTaskLists([...taskLists])
-
-	}
 
 
 
@@ -177,7 +138,6 @@ function App() {
 					<Route path='/' element={<Login logEnter={logEnter} />} />
 					<Route path='/register' element={<Register regEnter={regEnter} AddUser={AddUser} />} />
 					<Route path='/workspace' element={<Workspace
-						doneTask={doneTask}
 					/>} />
 				</Routes>
 			</BrowserRouter>

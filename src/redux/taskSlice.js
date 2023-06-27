@@ -33,10 +33,15 @@ export const counterSlice = createSlice({
 		},
 		removeTask: (state, action) => {
 			state.taskLists[action.payload.listIndex].tasks = state.taskLists[action.payload.listIndex].tasks.filter(task => task !== state.taskLists[action.payload.listIndex].tasks[action.payload.taskIndex])
+		},
+		doneTask: (state, action) => {
+			state.taskLists[action.payload.listIndex].tasks[action.payload.taskIndex].complete = !state.taskLists[action.payload.listIndex].tasks[action.payload.taskIndex].complete
+
+
 		}
 	},
 })
 
-export const { addList, removeList, addTask, removeTask } = counterSlice.actions
+export const { addList, removeList, addTask, removeTask, doneTask } = counterSlice.actions
 
 export default counterSlice.reducer
