@@ -153,10 +153,10 @@ function App() {
 	// 	}
 	// }
 
-	const removeTask = (listIndex, taskIndex) => {
-		taskLists[listIndex].tasks = taskLists[listIndex].tasks.filter(task => task !== taskLists[listIndex].tasks[taskIndex])
-		setTaskLists([...taskLists])
-	}
+	// const removeTask = (listIndex, taskIndex) => {
+	// 	taskLists[listIndex].tasks = taskLists[listIndex].tasks.filter(task => task !== taskLists[listIndex].tasks[taskIndex])
+	// 	setTaskLists([...taskLists])
+	// }
 
 	const doneTask = (listIndex, taskindex) => {
 		taskLists[listIndex].tasks[taskindex].complete = !taskLists[listIndex].tasks[taskindex].complete
@@ -177,7 +177,6 @@ function App() {
 					<Route path='/' element={<Login logEnter={logEnter} />} />
 					<Route path='/register' element={<Register regEnter={regEnter} AddUser={AddUser} />} />
 					<Route path='/workspace' element={<Workspace
-						removeTask={removeTask}
 						doneTask={doneTask}
 					/>} />
 				</Routes>

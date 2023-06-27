@@ -3,7 +3,7 @@ import Task from './Task'
 import { removeList, addTask } from '../redux/taskSlice'
 import { useDispatch } from 'react-redux'
 
-export default function Tasklist({ list, index, removeTask, doneTask }) {
+export default function Tasklist({ list, index, doneTask }) {
 
 	const dispatch = useDispatch()
 	const [newTask, setNewTask] = useState('')
@@ -43,7 +43,6 @@ export default function Tasklist({ list, index, removeTask, doneTask }) {
 						task={task}
 						taskIndex={i}
 						listIndex={index}
-						removeTask={removeTask}
 						doneTask={doneTask}
 
 					/>

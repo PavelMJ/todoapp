@@ -31,6 +31,9 @@ export const counterSlice = createSlice({
 
 			}
 		},
+		removeTask: (state, action) => {
+			state.taskLists[action.payload.listIndex].tasks = state.taskLists[action.payload.listIndex].tasks.filter(task => task !== state.taskLists[action.payload.listIndex].tasks[action.payload.taskIndex])
+		}
 	},
 })
 
